@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { initWeb3, getWeb3 } from './utils/web3Utils';
 import WalletConnection from './components/WalletConnection';
 import VotingCard from './components/VotingCard';
 import ResultsDisplay from './components/ResultsDisplay';
@@ -15,9 +16,72 @@ function App() {
   const [contractInitialized, setContractInitialized] = useState(false);
 
   // Contract address - REPLACE WITH YOUR DEPLOYED CONTRACT ADDRESS
-  const CONTRACT_ADDRESS = '0x8Ac913Ffeb91121E066f0dA737e89AF40CA99d75';
+  const CONTRACT_ADDRESS = '0x4e9579b2b418B9b73F183De6A0FdeEADbE0b2A3B';
 
+  // useEffect(() => {
+  //   initializeApp();
+  // }, []);
+
+
+  // useEffect(() => {
+  //   const initializeApp = async () => {
+  //     try {
+  //       if (!process.env.REACT_APP_CONTRACT_ADDRESS) {
+  //         console.error('Contract address not set in .env');
+  //         return;
+  //       }
+        
+  //       await initContract(process.env.REACT_APP_CONTRACT_ADDRESS);
+        
+  //       const voterInfo = await getVoterInfo();
+  //       console.log('Voter info:', voterInfo);
+        
+  //       const proposals = await getProposals();
+  //       setProposals(proposals);
+  //     } catch (error) {
+  //       console.error('Error initializing app:', error);
+  //     }
+  //   };
+
+  //   initializeApp();
+  // }, []);
   useEffect(() => {
+    const initializeApp = async () => {
+      try {
+        setLoading(true);
+        
+        // Step 1: Initialize Web3 with MetaMask
+        console.log('Step 1: Initializing Web3...');
+        await initWeb3();
+        
+        // Step 2: Initialize Contract
+        const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        if (!contractAddress) {
+          throw new Error('REACT_APP_CONTRACT_ADDRESS not set in .env');
+        }
+        
+        console.log('Step 2: Initializing contract at', contractAddress);
+        await initContract(contractAddress);
+        
+        // Step 3: Fetch voter info
+        console.log('Step 3: Fetching voter info...');
+        const voter = await getVoterInfo();
+        setVoterInfo(voter);
+        
+        // Step 4: Fetch proposals
+        console.log('Step 4: Fetching proposals...');
+        const props = await getProposals();
+        setProposals(props);
+        
+        setError(null);
+      } catch (err) {
+        console.error('Error during initialization:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     initializeApp();
   }, []);
 

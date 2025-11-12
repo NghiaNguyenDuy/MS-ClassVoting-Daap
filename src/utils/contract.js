@@ -1,19 +1,40 @@
-import { getWeb3 } from './web3';
+// import { getWeb3 } from './web3';
+import { getWeb3, getAccounts } from './web3Utils';
 import BallotABI from '../contracts/Ballot.json';
 
 let contractInstance = null;
 
+// Initialize contract with address
 export const initContract = async (contractAddress) => {
   try {
+    console.log('Initializing contract at address:', contractAddress);
+    
+    // Get Web3 instance
     const web3 = getWeb3();
+
+    // Validate ABI
+    if (!BallotABI) {
+      throw new Error('BallotABI is undefined - JSON file not found');
+    }
+    if (!BallotABI.abi) {
+      throw new Error('BallotABI.abi is undefined - Invalid JSON structure');
+    }
+
+    // Validate address
+    if (!web3.utils.isAddress(contractAddress)) {
+      throw new Error(`Invalid contract address: ${contractAddress}`);
+    }
+
+    // Create contract instance
     contractInstance = new web3.eth.Contract(
       BallotABI.abi,
       contractAddress
     );
-    console.log("Contract initialized at", contractAddress);
+
+    console.log('✓ Contract initialized successfully');
     return contractInstance;
   } catch (error) {
-    console.error("Error initializing contract:", error);
+    console.error('Error initializing contract:', error);
     throw error;
   }
 };
@@ -24,6 +45,15 @@ export const getContractInstance = () => {
   }
   return contractInstance;
 };
+
+// Export getter function to access contract
+// export const getContract = () => {
+//   if (!contractInstance) {
+//     throw new Error('Contract not initialized. Call initContract first.');
+//   }
+//   return contractInstance;
+// };
+
 
 // Contract interaction functions
 export const giveVotingRights = async (voterAddress, fromAddress) => {
@@ -75,21 +105,45 @@ export const getProposals = async () => {
   }
 };
 
-export const getVoterInfo = async (voterAddress) => {
+// export const getVoterInfo = async (voterAddress) => {
+//   try {
+//     const contract = getContractInstance();
+//     const voter = await contract.methods.voters(voterAddress).call();
+//     return {
+//       weight: voter.weight,
+//       voted: voter.voted,
+//       delegate: voter.delegate,
+//       vote: voter.vote
+//     };
+//   } catch (error) {
+//     console.error("Error fetching voter info:", error);
+//     throw error;
+//   }
+// };
+
+// FIX: Pass the voter's address to getVoterInfo
+export const getVoterInfo = async () => {
   try {
     const contract = getContractInstance();
-    const voter = await contract.methods.voters(voterAddress).call();
-    return {
-      weight: voter.weight,
-      voted: voter.voted,
-      delegate: voter.delegate,
-      vote: voter.vote
-    };
+    const accounts = await getAccounts();
+    
+    if (!accounts || accounts.length === 0) {
+      throw new Error('No accounts available');
+    }
+    
+    const voterAddress = accounts[0];
+    console.log('Fetching voter info for:', voterAddress);
+    
+    // PASS the address as a parameter
+    const voterInfo = await contract.methods.getVoterInfo(voterAddress).call();
+    console.log('✓ Voter info:', voterInfo);
+    return voterInfo;
   } catch (error) {
-    console.error("Error fetching voter info:", error);
+    console.error('Error fetching voter info:', error);
     throw error;
   }
 };
+
 
 export const getWinner = async () => {
   try {
