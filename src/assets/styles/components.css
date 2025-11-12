@@ -1,0 +1,255 @@
+/* Wallet Connection */
+.wallet-connection {
+  display: flex;
+  align-items: center;
+}
+
+.connect-btn,
+.disconnect-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.connect-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.connected-wallet {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #e8f5e9;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  border: 2px solid #4caf50;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  background: #4caf50;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.account-info {
+  color: #333;
+  font-weight: 500;
+}
+
+.disconnect-btn {
+  background: #f44336;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.disconnect-btn:hover {
+  background: #d32f2f;
+}
+
+/* Voting Card */
+.voting-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.voting-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+  flex: 1;
+}
+
+.candidate-name {
+  color: #333;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.vote-stats {
+  margin: 0.5rem 0;
+}
+
+.vote-count {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.count {
+  font-weight: bold;
+  color: #667eea;
+  font-size: 1.2rem;
+}
+
+.vote-bar {
+  background: #e0e0e0;
+  border-radius: 10px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.vote-progress {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.vote-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+  white-space: nowrap;
+}
+
+.vote-button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.vote-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.vote-message {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+/* Results Display */
+.results-display h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.time-remaining {
+  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.time-remaining span {
+  font-size: 1.3rem;
+}
+
+.results-list {
+  margin-bottom: 1.5rem;
+}
+
+.result-item {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.result-item.winner {
+  background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+  border-left: 4px solid #fbc02d;
+  padding-left: 1.25rem;
+}
+
+.result-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.result-info .candidate-name {
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.vote-info {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.result-bar {
+  background: #e0e0e0;
+  border-radius: 10px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.result-progress {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.result-item.winner .result-progress {
+  background: linear-gradient(90deg, #fbc02d 0%, #f57f17 100%);
+}
+
+.winner-announcement {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.winner-announcement h3 {
+  color: #333;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .voting-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .vote-button {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .result-info {
+    flex-direction: column;
+  }
+}
