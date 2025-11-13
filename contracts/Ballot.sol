@@ -42,14 +42,33 @@ contract Ballot {
         }
     }
 
+    // function giveRightToVote(address voter) external {
+    //     require(msg.sender == chairperson, "Only chairperson can give right to vote.");
+    //     require(!voters[voter].voted, "The voter already voted.");
+    //     require(voters[voter].weight == 0, "Voter already has voting rights");
+    //     voters[voter].weight = 1;
+    //     emit VoterRegistered(voter);
+    // }
+
     function giveRightToVote(address voter) external {
-        require(msg.sender == chairperson, "Only chairperson can give right to vote.");
-        require(!voters[voter].voted, "The voter already voted.");
-        require(voters[voter].weight == 0, "Voter already has voting rights");
+        require(
+            msg.sender == chairperson,
+            "Only chairperson can give right to vote."
+        );
+        require(
+            !voters[voter].voted,
+            "The voter already voted."
+        );
+        
+        // Check if voter already has rights - if yes, just return silently
+        if (voters[voter].weight > 0) {
+            return;
+        }
+        
         voters[voter].weight = 1;
         emit VoterRegistered(voter);
-    }
-
+        }
+        
     function delegate(address to) external {
         require(block.timestamp >= votingStart && block.timestamp <= votingEnd, "Voting is not active");
         

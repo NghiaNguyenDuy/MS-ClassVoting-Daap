@@ -31,6 +31,11 @@ export const initContract = async (contractAddress) => {
       contractAddress
     );
 
+    
+    // b) Does the address have code?
+    const code = await web3.eth.getCode(contractAddress);
+    console.log('code:', code);                 // MUST NOT be "0x"
+
     console.log('✓ Contract initialized successfully');
     return contractInstance;
   } catch (error) {
@@ -133,7 +138,12 @@ export const getVoterInfo = async () => {
     
     const voterAddress = accounts[0];
     console.log('Fetching voter info for:', voterAddress);
+
     
+
+    // c) Does the method exist in the ABI you’re using?
+    console.log(!!contract.methods.getVoterInfo); // should be true
+        
     // PASS the address as a parameter
     const voterInfo = await contract.methods.getVoterInfo(voterAddress).call();
     console.log('✓ Voter info:', voterInfo);

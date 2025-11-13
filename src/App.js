@@ -16,7 +16,7 @@ function App() {
   const [contractInitialized, setContractInitialized] = useState(false);
 
   // Contract address - REPLACE WITH YOUR DEPLOYED CONTRACT ADDRESS
-  const CONTRACT_ADDRESS = '0x4e9579b2b418B9b73F183De6A0FdeEADbE0b2A3B';
+  const CONTRACT_ADDRESS = '0x44B4cBabdFD786bE9b2CEE11149c65543D155817';
 
   // useEffect(() => {
   //   initializeApp();

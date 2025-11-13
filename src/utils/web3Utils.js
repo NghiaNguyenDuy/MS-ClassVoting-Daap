@@ -17,6 +17,7 @@ export const initWeb3 = async () => {
     });
 
     console.log('✓ Web3 initialized with account:', accounts[0]);
+    // should match Ganache chain id
     return web3Instance;
   } catch (error) {
     console.error('Error initializing Web3:', error);
