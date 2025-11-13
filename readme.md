@@ -22,9 +22,9 @@ A blockchain-based classroom voting application built with Solidity (Ethereum sm
 
 ### 1. Clone the Repository
 
-git clone https://github.com/NghiaNguyenDuy/MS-ClassVoting-Daap.git
+<pre> ```git clone https://github.com/NghiaNguyenDuy/MS-ClassVoting-Daap.git
 cd MS-ClassVoting-Daap
-npm install
+npm install ``` </pre>
 
 
 ---
@@ -34,15 +34,15 @@ npm install
 - **GUI:** Launch Ganache and click "Quickstart" (`http://127.0.0.1:7545`)
 - **CLI:**  
 
-ganache-cli -p 7545 -i 1337
+<pre> ```ganache-cli -p 7545 -i 1337 ``` </pre>
 
 
 ---
 
 ### 3. Compile and Deploy Contracts
 
-truffle compile
-truffle migrate --reset
+<pre> ```truffle compile
+truffle migrate --reset ``` </pre>
 
 - **Copy the deployed Ballot contract address** from the terminal output.
 
@@ -50,7 +50,7 @@ truffle migrate --reset
 
 ### 4. Update the Frontend ABI
 
-cp build/contracts/Ballot.json src/contracts/Ballot.json
+<pre> ```cp build/contracts/Ballot.json src/contracts/Ballot.json ``` </pre>
 
 
 
@@ -60,8 +60,8 @@ cp build/contracts/Ballot.json src/contracts/Ballot.json
 
 - Create a `.env` file in the project root:
 
-REACT_APP_CONTRACT_ADDRESS=0xYOUR_DEPLOYED_CONTRACT_ADDRESS
-REACT_APP_NETWORK_ID=1337
+<pre> ```REACT_APP_CONTRACT_ADDRESS=0xYOUR_DEPLOYED_CONTRACT_ADDRESS
+REACT_APP_NETWORK_ID=1337 ``` </pre>
 
 
 - Replace `0xYOUR_DEPLOYED_CONTRACT_ADDRESS` with the contract address from migration.
@@ -85,7 +85,7 @@ REACT_APP_NETWORK_ID=1337
 
 ### 7. Start the React Frontend
 
-npm start
+<pre> ```npm start ``` </pre>
 
 
 - Visit [http://localhost:3000](http://localhost:3000) in your browser.
